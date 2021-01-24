@@ -1,0 +1,50 @@
+.bg-primary {
+    background: #495464 !important;
+}
+
+a.navbar-brand {
+    color: #ffe3d8 !important;
+    font-weight: 600;
+}
+
+a.nav-link {
+    color: #433520 !important;
+} 
+
+ul.nav.flex-column {
+    background: #fde8cd;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+h5 {
+    margin-top: 5px;
+}
+
+h3{
+    margin-top: 8px;
+    font-weight: 330;
+}
+
+code {
+    color: #a9294f;
+    font-weight: 545 !important;
+    border-radius: 5px;
+    border-color: #ffe6e6;
+}
+
+span.hljs-comment {
+    color: #03506f;
+}
+
+footer.col-md-12>p {
+    display: none;
+}
+
+div.col-md-9 {
+    padding-left: 2rem;
+    padding-right: 2rem !important;
+    width: fit-content !important; 
+}
