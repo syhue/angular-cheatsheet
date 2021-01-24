@@ -9,6 +9,7 @@ a.navbar-brand {
 
 a.nav-link {
     color: #433520 !important;
+    font-size: 14px;
 } 
 
 ul.nav.flex-column {
@@ -44,7 +45,10 @@ footer.col-md-12>p {
 }
 
 div.col-md-9 {
-    padding-left: 2rem;
-    padding-right: 2rem !important;
-    width: fit-content !important; 
+    padding-left: 3rem;
+    padding-right: 2rem;
+}
+
+div.col-md-3 {
+    margin-bottom: 1rem !important;
 }
