@@ -53,7 +53,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#angular-cheat-sheet" class="nav-link">Angular Cheat Sheet</a>
+            <li class="nav-item" data-level="1"><a href="#angular-documentation" class="nav-link">Angular Documentation</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="3"><a href="#angular-cli-commands" class="nav-link">Angular CLI Commands</a>
               <ul class="nav flex-column">
@@ -73,14 +73,42 @@
             </li>
             <li class="nav-item" data-level="3"><a href="#angular" class="nav-link">Angular</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="5"><a href="#debug" class="nav-link">Debug</a>
+            <li class="nav-item" data-level="5"><a href="#debug-in-typescriptjavascript" class="nav-link">Debug in TypeScript/JavaScript</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="5"><a href="#calling-api" class="nav-link">Calling API</a>
+            <li class="nav-item" data-level="5"><a href="#calling-api-without-observable" class="nav-link">Calling API without Observable</a>
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="5"><a href="#calling-api-with-observable-1" class="nav-link">Calling API with Observable #1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="5"><a href="#calling-api-with-observable-2" class="nav-link">Calling API with Observable #2</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="5"><a href="#routing" class="nav-link">Routing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="5"><a href="#call-nested-object-from-api" class="nav-link">Call nested object from API</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            <li class="nav-item" data-level="3"><a href="#javascript-built-in-functions" class="nav-link">JavaScript Built In Functions</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="5"><a href="#map" class="nav-link">map</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            <li class="nav-item" data-level="3"><a href="#rxjs" class="nav-link">Rxjs</a>
+              <ul class="nav flex-column">
               </ul>
             </li>
               </ul>
@@ -90,7 +118,7 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="angular-cheat-sheet">Angular Cheat Sheet</h1>
+<h1 id="angular-documentation">Angular Documentation</h1>
 <p>Reach me at: <a href="https://www.github.com/syhue">GitHub</a>, <a href="https://www.syhue.com">Personal Website</a>, <a href="https://www.linkedin.com/in/syhue/">LinkedIn</a></p>
 <h3 id="angular-cli-commands">Angular CLI Commands</h3>
 <h5 id="beginning">Beginning</h5>
@@ -113,11 +141,11 @@
 <li><code>now</code> - Deploy your project. </li>
 </ul>
 <h3 id="angular">Angular</h3>
-<h5 id="debug">Debug</h5>
+<h5 id="debug-in-typescriptjavascript">Debug in TypeScript/JavaScript</h5>
 <pre><code>debugger 
 console.log()
 </code></pre>
-<h5 id="calling-api">Calling API</h5>
+<h5 id="calling-api-without-observable">Calling API without Observable</h5>
 <pre><code>#Api.service.ts
 
 export class service-name {
@@ -153,7 +181,118 @@ export class component-name implements OnInit {
             }))
     }
 }
-</code></pre></div>
+</code></pre>
+<h5 id="calling-api-with-observable-1">Calling API with Observable #1</h5>
+<pre><code># service.ts
+
+getData(id: number, skip: number, take: number): Observable&lt;Data[]&gt;{
+    const params: any = {
+        first-param: userId,
+        second-param: skip.toString(),  # What is toStrng()?
+        third-param: take.toString(),
+    }
+
+    return this.http.get&lt;DataModel[]&gt;(this.route + 'MiddlePartOfURL', { params: params })
+        .pipe(map(models =&gt; {
+            return models.map(model =&gt; new MesraPointHistory(model));   
+    }))
+}
+
+# data-model.ts
+
+export class DataModel {
+    PointId: number;
+    CreateDate: string;
+    Point: number;
+    Remark: string;
+    Title: string;
+}
+
+# data.ts
+
+import { DataModel } from "./data-model";
+import { Moment } from "moment";
+import { BaseClass } from "../base-class";
+
+export class Data extends BaseClass {
+    id: number;
+    createDate: Moment;
+    point: number;
+    remark: string;
+    title: string;
+
+    constructor(
+        model: DataModel
+    ) {
+        super();
+        this.id = model.PointId;
+        this.createDate = this.toMoment(model.CreateDate);
+        this.point = model.Point;
+        this.remark = model.Remark;
+        this.title = model.Title;
+    }
+}
+
+# data.component.ts
+
+this.loading = true;
+
+getData(): void {
+
+    const skip = this.array.length;
+    const take = 10;
+
+    this.userService.getData(this.userId, skip, take).subscribe(
+        (data: Data[]) =&gt; {
+            this.array = this.array.concat(data);
+
+            if (data.length &lt; take) {
+                this.endOfList = true;
+            }
+        },
+        () =&gt; {
+            this.endOfList = true;
+        }
+    )
+        .add(() =&gt; { this.loading = false });
+}
+</code></pre>
+<h5 id="calling-api-with-observable-2">Calling API with Observable #2</h5>
+<pre><code>getUser(reload = false): Observable &lt;User&gt; {
+    if (!reload &amp;&amp; this.currentUser)
+        return of(this.currentUser);  # of() # import { of } from 'rxjs';
+
+    return this.http.get&lt;UserModel&gt;(this.route + "Profile")
+        .pipe(map(model =&gt; {
+            this.currentUser = new User(model);
+            return this.currentUser;
+        }));
+}
+</code></pre>
+<h5 id="routing">Routing</h5>
+<pre><code>{ path: 'profile/web-dev', component: WebDevComponent , data: { title: 'Web Development'} },  # app-routing.module.ts
+
+this.router.navigate(['wed-dev']); # profile.component.ts
+
+[routerLink]="'web-dev/'" # profile.component.html
+</code></pre>
+<h5 id="call-nested-object-from-api">Call nested object from API</h5>
+<pre><code>&lt;div *ngFor='let item of items'&gt;
+    {{ item.something }}
+&lt;/div&gt;
+</code></pre>
+<h3 id="javascript-built-in-functions">JavaScript Built In Functions</h3>
+<h5 id="map">map</h5>
+<pre><code>const array1 = [1, 4, 9, 16];
+
+# pass a function to map
+const map1 = array1.map(x =&gt; x * 2);
+
+console.log(map1);
+# expected output: Array [2, 8, 18, 32]
+</code></pre>
+<h3 id="rxjs">Rxjs</h3>
+<p><a href="https://rxjs.dev/api">function/of</a></p></div>
             </div>
         </div>
 
@@ -237,5 +376,5 @@ export class component-name implements OnInit {
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-24 23:47:17.575530+00:00
+Build Date UTC : 2021-01-25 12:30:02.726181+00:00
 -->
