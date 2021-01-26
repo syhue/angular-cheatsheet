@@ -188,7 +188,7 @@ export class component-name implements OnInit {
 getData(id: number, skip: number, take: number): Observable&lt;Data[]&gt;{
     const params: any = {
         first-param: userId,
-        second-param: skip.toString(),  # What is toStrng()?
+        second-param: skip.**toString()**,  # What is toString()?
         third-param: take.toString(),
     }
 
@@ -376,5 +376,5 @@ console.log(map1);
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-25 12:30:02.726181+00:00
+Build Date UTC : 2021-01-26 01:29:30.740970+00:00
 -->
