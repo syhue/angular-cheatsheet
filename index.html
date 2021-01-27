@@ -77,15 +77,19 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="5"><a href="#calling-api-without-observable" class="nav-link">Calling API without Observable</a>
+            <li class="nav-item" data-level="5"><a href="#calling-api-without-observable-1-get" class="nav-link">Calling API without Observable #1 (Get)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="5"><a href="#calling-api-with-observable-1" class="nav-link">Calling API with Observable #1</a>
+            <li class="nav-item" data-level="5"><a href="#calling-api-without-observable-2-post-put" class="nav-link">Calling API without Observable #2 (Post, Put)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="5"><a href="#calling-api-with-observable-2" class="nav-link">Calling API with Observable #2</a>
+            <li class="nav-item" data-level="5"><a href="#calling-api-with-observable-1-get" class="nav-link">Calling API with Observable #1 (Get)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="5"><a href="#calling-api-with-observable-2-get" class="nav-link">Calling API with Observable #2 (Get)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -94,6 +98,14 @@
               </ul>
             </li>
             <li class="nav-item" data-level="5"><a href="#call-nested-object-from-api" class="nav-link">Call nested object from API</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="5"><a href="#perform-event-click-in-typescript" class="nav-link">Perform event click in typescript</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="5"><a href="#ngbmodal" class="nav-link">NgbModal</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -145,7 +157,7 @@
 <pre><code>debugger 
 console.log()
 </code></pre>
-<h5 id="calling-api-without-observable">Calling API without Observable</h5>
+<h5 id="calling-api-without-observable-1-get">Calling API without Observable #1 (Get)</h5>
 <pre><code>#Api.service.ts
 
 export class service-name {
@@ -182,7 +194,28 @@ export class component-name implements OnInit {
     }
 }
 </code></pre>
-<h5 id="calling-api-with-observable-1">Calling API with Observable #1</h5>
+<h5 id="calling-api-without-observable-2-post-put">Calling API without Observable #2 (Post, Put)</h5>
+<pre><code>updateProfilePhoto(file: any) {
+    const formsData = new FormData(); # FormData() is a built in function. 
+    formData.append("file", file);
+
+    return this.http.post(this.route + "ProfilePhoto", formData) # In Postman, the body column need a file
+}
+
+updateProfile(body: any, file:any) {
+
+    return this.http.put(this.route + "Profile", body).pipe(mergeMap(result =&gt; {
+        let observables: Observable&lt;any&gt;[] = [of({})];
+
+        if (file) {
+            observables = observables.concat(this.updateProfiile(file.file));
+        }
+
+        return forkJoin(...observables);
+    }));
+}
+</code></pre>
+<h5 id="calling-api-with-observable-1-get">Calling API with Observable #1 (Get)</h5>
 <pre><code># service.ts
 
 getData(id: number, skip: number, take: number): Observable&lt;Data[]&gt;{
@@ -257,7 +290,7 @@ getData(): void {
         .add(() =&gt; { this.loading = false });
 }
 </code></pre>
-<h5 id="calling-api-with-observable-2">Calling API with Observable #2</h5>
+<h5 id="calling-api-with-observable-2-get">Calling API with Observable #2 (Get)</h5>
 <pre><code>getUser(reload = false): Observable &lt;User&gt; {
     if (!reload &amp;&amp; this.currentUser)
         return of(this.currentUser);  # of() # import { of } from 'rxjs';
@@ -281,6 +314,20 @@ this.router.navigate(['wed-dev']); # profile.component.ts
     {{ item.something }}
 &lt;/div&gt;
 </code></pre>
+<h5 id="perform-event-click-in-typescript">Perform event click in typescript</h5>
+<pre><code>click.this.getAccessment # click it will direct to this.get.Accessment.
+</code></pre>
+<h5 id="ngbmodal">NgbModal</h5>
+<pre><code>addPopupCard() {
+
+    const option = {
+        size: 'lg',
+        centered: true
+    } as NgbModalOptions;
+
+    this.modalService.open(AddMesraModal, option);
+}
+</code></pre>
 <h3 id="javascript-built-in-functions">JavaScript Built In Functions</h3>
 <h5 id="map">map</h5>
 <pre><code>const array1 = [1, 4, 9, 16];
@@ -292,7 +339,7 @@ console.log(map1);
 # expected output: Array [2, 8, 18, 32]
 </code></pre>
 <h3 id="rxjs">Rxjs</h3>
-<p><a href="https://rxjs.dev/api">function/of</a></p></div>
+<p><a href="https://rxjs.dev/api/index/function/of">function/of</a></p></div>
             </div>
         </div>
 
@@ -376,5 +423,5 @@ console.log(map1);
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-26 01:29:30.740970+00:00
+Build Date UTC : 2021-01-27 02:14:05.433448+00:00
 -->
