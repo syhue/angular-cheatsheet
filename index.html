@@ -250,6 +250,51 @@ getData(): void {
         }));
 }
 </code></pre>
+<h5 id="model-mapping">Model Mapping</h5>
+<p><strong>to provide a translation layer between server model and data model</strong></p>
+<pre><code># service.ts
+
+getData(): Observable&lt;**Example**[]&gt; {
+
+    return this.http.get&lt;**ExampleModel**[]&gt;(this.atozRoute + "GetData")
+        .pipe(map(model =&gt; model.map(m =&gt; new Alphabet(m)))); # the translation layer 
+}
+
+
+# example.ts
+
+import { AlphabetModel } from "./alphabet-model";
+
+export class Alphabet {
+    id: number;
+    title: string;
+    selectionTitle: string;
+    description: string;
+    imageUrl: string;
+    shareUrl: string;
+
+    constructor(model: AlphabetModel) { 
+        this.id = model.Id;
+        this.title = model.Title;
+        this.selectionTitle = model.SelectionTitle;
+        this.description = model.Description;
+        this.imageUrl = model.ImageUrl;
+        this.shareUrl = model.ShareUrl;
+    }
+}
+
+
+# example-model.ts
+
+export class AlphabetModel {
+Id: number;
+Title: string;
+SelectionTitle: string;
+Description: string;
+ImageUrl: string;
+ShareUrl: string;
+</code></pre>
+<p>}</p>
 <h5 id="routing">Routing</h5>
 <pre><code>{ path: 'profile/web-dev', component: WebDevComponent , data: { title: 'Web Development'} },  # app-routing.module.ts
 
@@ -281,10 +326,10 @@ this.router.navigate(['wed-dev']); # profile.component.ts
 <pre><code>const array1 = [1, 4, 9, 16];
 
 # pass a function to map
-const map1 = array1.map(x =&gt; x * 2);
+const map1 = array1.map(x =&gt; x * 3);
 
 console.log(map1);
-# expected output: Array [2, 8, 18, 32]
+# expected output: Array [3, 12, 27, 48]
 </code></pre>
 <h3 id="rxjs">Rxjs</h3>
 <p><a href="https://rxjs.dev/api/index/function/of">function/of</a></p></div>
@@ -371,5 +416,5 @@ console.log(map1);
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-27 02:49:01.834911+00:00
+Build Date UTC : 2021-01-29 23:54:36.048618+00:00
 -->
