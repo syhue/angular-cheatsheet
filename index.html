@@ -263,9 +263,9 @@ getData(): Observable&lt;**Example**[]&gt; {
 
 # example.ts
 
-import { AlphabetModel } from "./alphabet-model";
+import { ExampleModel } from "./example-model";
 
-export class Alphabet {
+export class Example {
     id: number;
     title: string;
     selectionTitle: string;
@@ -273,7 +273,7 @@ export class Alphabet {
     imageUrl: string;
     shareUrl: string;
 
-    constructor(model: AlphabetModel) { 
+    constructor(model: ExampleModel) { 
         this.id = model.Id;
         this.title = model.Title;
         this.selectionTitle = model.SelectionTitle;
@@ -286,7 +286,7 @@ export class Alphabet {
 
 # example-model.ts
 
-export class AlphabetModel {
+export class ExampleModel {
 Id: number;
 Title: string;
 SelectionTitle: string;
@@ -416,5 +416,5 @@ console.log(map1);
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-29 23:54:36.048618+00:00
+Build Date UTC : 2021-01-29 23:57:49.467234+00:00
 -->
