@@ -270,16 +270,12 @@ export class Example {
     title: string;
     selectionTitle: string;
     description: string;
-    imageUrl: string;
-    shareUrl: string;
 
     constructor(model: ExampleModel) { 
         this.id = model.Id;
         this.title = model.Title;
         this.selectionTitle = model.SelectionTitle;
         this.description = model.Description;
-        this.imageUrl = model.ImageUrl;
-        this.shareUrl = model.ShareUrl;
     }
 }
 
@@ -287,14 +283,12 @@ export class Example {
 # example-model.ts
 
 export class ExampleModel {
-Id: number;
-Title: string;
-SelectionTitle: string;
-Description: string;
-ImageUrl: string;
-ShareUrl: string;
+    Id: number;
+    Title: string;
+    SelectionTitle: string;
+    Description: string;
+}
 </code></pre>
-<p>}</p>
 <h5 id="routing">Routing</h5>
 <pre><code>{ path: 'profile/web-dev', component: WebDevComponent , data: { title: 'Web Development'} },  # app-routing.module.ts
 
@@ -416,5 +410,5 @@ console.log(map1);
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-29 23:57:49.467234+00:00
+Build Date UTC : 2021-01-30 00:02:54.573439+00:00
 -->
