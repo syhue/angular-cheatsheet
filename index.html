@@ -63,6 +63,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="3"><a href="#attribute-directive-ngclass-directive" class="nav-link">Attribute Directive: NgClass Directive</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-level="3"><a href="#javascript-built-in-functions" class="nav-link">JavaScript Built In Functions</a>
               <ul class="nav flex-column">
               </ul>
@@ -315,6 +319,34 @@ this.router.navigate(['wed-dev']); # profile.component.ts
     this.modalService.open(any-component, option);
 }
 </code></pre>
+<h3 id="attribute-directive-ngclass-directive">Attribute Directive: NgClass Directive</h3>
+<p><strong>ngClass Directive: The ngClass directive is used to add or remove CSS classes to an HTML element.</strong></p>
+<pre><code># login.component.html
+
+&lt;form class="loginForm"
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+          [ngClass]="{'showFormError': showFormError}"&gt;
+&lt;/form&gt;
+
+
+# login.component.ts
+
+submit(): void {
+if (!this.form.valid) {
+    this.showFormError = true;
+    return;
+}
+
+
+ #login.component.scss
+
+.showFormError {
+    input.ng-invalid {
+        border-color: red !important;
+    }
+}
+</code></pre>
 <h3 id="javascript-built-in-functions">JavaScript Built In Functions</h3>
 <h5 id="map">map</h5>
 <pre><code>const array1 = [1, 4, 9, 16];
@@ -324,6 +356,52 @@ const map1 = array1.map(x =&gt; x * 3);
 
 console.log(map1);
 # expected output: Array [3, 12, 27, 48]
+</code></pre>
+<h5 id="immediately-invoke-function-expression-iifes">Immediately Invoke Function Expression (IIFEs)</h5>
+<pre><code># Part 1
+
+(function(name) {
+
+    var greeting = 'Hello';
+    console.log(greeting + ' ' + name);
+
+}('John'));
+
+
+# Part 2
+
+function buildFunctions2() {
+
+    var arr = [];
+
+    for (var i = 0; i&lt;3; i++) {
+        arr.push(
+            (function(j)
+                return function() {
+                    console.log(j);
+                }(i))
+        )
+    }
+}
+
+var fs2 = buildFunctions2();
+
+fs2[0]();
+fs2[1]();
+fs2[2]();
+</code></pre>
+<h5 id="closures">Closures</h5>
+<pre><code>function greet(whattosay) {
+
+    return function(name) {
+        console.log(whattosay + ' ' + name);
+    }
+}
+
+greet('Hi')('Tony');
+
+var sayHi = greet('Hi');
+sayHi('Tony');
 </code></pre>
 <h3 id="rxjs">Rxjs</h3>
 <p><a href="https://rxjs.dev/api/index/function/of">function/of</a></p></div>
@@ -410,5 +488,5 @@ console.log(map1);
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-31 07:26:12.983588+00:00
+Build Date UTC : 2021-01-31 23:28:29.548868+00:00
 -->
