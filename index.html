@@ -254,7 +254,7 @@ getData(): void {
 <p><strong>to provide a translation layer between server model and data model</strong></p>
 <pre><code># service.ts
 
-getData(): Observable&lt;**Example**[]&gt; {
+getData(): Observable&lt;Example[]&gt; {
 
     return this.http.get&lt;**ExampleModel**[]&gt;(this.atozRoute + "GetData")
         .pipe(map(model =&gt; model.map(m =&gt; new Alphabet(m)))); # the translation layer 
@@ -410,5 +410,5 @@ console.log(map1);
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-01-30 00:02:54.573439+00:00
+Build Date UTC : 2021-01-31 07:26:12.983588+00:00
 -->
