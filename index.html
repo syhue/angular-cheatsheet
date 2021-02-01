@@ -101,48 +101,154 @@
 <li><code>now</code> - Deploy your project. </li>
 </ul>
 <h3 id="angular">Angular</h3>
+<h5 id="communicate-from-parent-to-child-component">Communicate from parent to child component...</h5>
+<pre><code># Parent component template
+&lt;app-home [title]=" 'Peace' "&gt;&lt;/app-home&gt;
+
+# Child component class
+import { Input } from 'angular';
+
+class ChildComponent {
+    @Input() title: string;
+}
+</code></pre>
+<h5 id="attribute-directive-ngclass-directive">Attribute Directive: NgClass Directive</h5>
+<p><strong>ngClass Directive: The ngClass directive is used to add or remove CSS classes to an HTML element.</strong></p>
+<pre><code># login.component.html
+
+&lt;form class="loginForm"
+          [formGroup]="form"
+          (ngSubmit)="submit()"
+          [ngClass]="{'showFormError': showFormError}"&gt;
+
+          # [ngClass]="{property: boolen}"
+&lt;/form&gt;
+
+
+# login.component.ts
+
+submit(): void {
+if (!this.form.valid) {
+    this.showFormError = true;
+    return;
+}
+
+
+# login.component.scss
+
+.showFormError {
+    input.ng-invalid {
+        border-color: red !important;
+    }
+}
+</code></pre>
+<h5 id="attribute-directive-ngswitch-directive">Attribute Directive: NgSwitch Directive</h5>
+<pre><code>&lt;div [ngSwitch]="currentPage"&gt;
+    &lt;div *ngSwitchCase="0"&gt; Current Page is zero &lt;/div&gt;
+    &lt;div *ngSwitchCase="1"&gt; Current Page is one &lt;/div&gt;
+    &lt;div *ngSwitchCase="2"&gt; Current Page is two &lt;/div&gt;
+    &lt;div *ngSwitchDefault&gt; Default Page &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h5 id="custom-attribute-directive">Custom Attribute Directive</h5>
+<p><code>ng new generate directive class</code> - Create a new directive.</p>
+<pre><code># class.directive.ts
+
+import { Directive, ElementRef, Input } from '@angular/core';
+
+@Directive({
+    selector: '[appClass]'
+})
+
+export class ClassDirective {
+
+    constructor(private element: ElementRef) {}
+
+    @Input('appClass') set backgroundColor(color: string) {
+        this.element.nativeElement.style.backgroundColor = color;
+    }
+}
+
+# component.html
+
+&lt;h1 [appClass]=" 'red' "&gt;&lt;/h1&gt;
+</code></pre>
+<h5 id="custom-structural-directives">Custom Structural Directives</h5>
+<p><code>ng generate directive times</code> </p>
+<pre><code># times.directive.ts
+
+import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
+
+@Directive({
+    selector: '[appTimes]'
+})
+
+export class TimesDirective {
+
+    constructor(
+        private viewContainer: ViewContainerRef,
+        private templateRef: TemplateRef&lt;any&gt;
+    ) { }
+
+    @Input('appTimes') set render(times: number) {
+        this.viewContainer.clear();
+
+        for (let i=0; i&lt;times; i++) {
+            this.viewContainer.createEmbeddedView(this.templateRef, {});
+        }
+    }
+}
+
+
+# component.html
+
+&lt;ul *appTimes="5"&gt;
+    &lt;li&gt;Hi there!&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<h5 id="custom-ngfor">Custom *ngFor</h5>
+<p><code>ng generate directive times</code> </p>
+<pre><code># times.directive.ts
+
+import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
+
+@Directive({
+    selector: '[appTimes]'
+})
+
+export class TimesDirective {
+
+    constructor(
+        private viewContainer: ViewContainerRef,
+        private templateRef: TemplateRef&lt;any&gt;
+    ) { }
+
+    @Input('appTimes') set render(times: number) {
+        this.viewContainer.clear();
+
+        for (let i=0; i&lt;times; i++) {
+            this.viewContainer.createEmbeddedView(this.templateRef, {
+                index: i
+            });
+        }
+    }
+}
+
+
+# component.html
+
+&lt;ng-container *appTimes="images.length; let i = index"&gt;
+    &lt;li
+        class="page-item"
+        [ngClass]="{ active: i === currentPage }"
+        *ngIf="checkWindowIndex(i)"
+    &gt;
+</code></pre>
 <h5 id="debug-in-typescriptjavascript">Debug in TypeScript/JavaScript</h5>
 <pre><code>debugger 
 console.log()
 </code></pre>
-<h5 id="calling-api-without-observable-1-get">Calling API without Observable #1 (Get)</h5>
-<pre><code>#Api.service.ts
-
-export class service-name {
-
-    route = 'https://syhue/'
-
-    constructor( 
-        private http: HttpClient,
-    ) {}
-
-    getData() {
-        this.http.get(this.route + 'CountryRegion', {params: params})
-        .pipe.map(data =&gt; {
-            return data.Result; 
-        })
-    }
-}
-
-#component.ts
-
-export class component-name implements OnInit {
-
-    constructor(
-        private apiService: ApiService,
-    )
-
-    ngOnInit() { }
-
-    getData() {
-        this.apiService.getData()
-            .subscribe((data =&gt; {
-                return data;
-            }))
-    }
-}
-</code></pre>
-<h5 id="calling-api-without-observable-2-post-put">Calling API without Observable #2 (Post, Put)</h5>
+<h5 id="calling-api-without-observable-1-post-put">Calling API without Observable #1 (Post, Put)</h5>
 <pre><code>updateProfilePhoto(file: any) {
     const formsData = new FormData(); # FormData() is a built in function. 
     formData.append("file", file);
@@ -169,7 +275,7 @@ updateProfile(body: any, file:any) {
 getData(id: number, skip: number, take: number): Observable&lt;Data[]&gt;{
     const params: any = {
         first-param: userId,
-        second-param: skip.**toString()**,  # What is toString()?
+        second-param: skip.toString(),  # What is toString()?
         third-param: take.toString(),
     }
 
@@ -256,7 +362,7 @@ getData(): void {
 
 getData(): Observable&lt;Example[]&gt; {
 
-    return this.http.get&lt;**ExampleModel**[]&gt;(this.atozRoute + "GetData")
+    return this.http.get&lt;ExampleModel[]&gt;(this.atozRoute + "GetData")
         .pipe(map(model =&gt; model.map(m =&gt; new Alphabet(m)))); # the translation layer 
 }
 
@@ -313,34 +419,6 @@ this.router.navigate(['wed-dev']); # profile.component.ts
     } as NgbModalOptions;
 
     this.modalService.open(any-component, option);
-}
-</code></pre>
-<h5 id="attribute-directive-ngclass-directive">Attribute Directive: NgClass Directive</h5>
-<p><strong>ngClass Directive: The ngClass directive is used to add or remove CSS classes to an HTML element.</strong></p>
-<pre><code># login.component.html
-
-&lt;form class="loginForm"
-          [formGroup]="form"
-          (ngSubmit)="submit()"
-          [ngClass]="{'showFormError': showFormError}"&gt;
-&lt;/form&gt;
-
-
-# login.component.ts
-
-submit(): void {
-if (!this.form.valid) {
-    this.showFormError = true;
-    return;
-}
-
-
-# login.component.scss
-
-.showFormError {
-    input.ng-invalid {
-        border-color: red !important;
-    }
 }
 </code></pre>
 <h3 id="javascript-built-in-functions">JavaScript Built In Functions</h3>
@@ -484,5 +562,5 @@ sayHi('Tony');
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-02-01 03:00:56.562171+00:00
+Build Date UTC : 2021-02-01 06:37:31.506109+00:00
 -->
