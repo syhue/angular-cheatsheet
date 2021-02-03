@@ -101,6 +101,55 @@
 <li><code>now</code> - Deploy your project. </li>
 </ul>
 <h3 id="angular">Angular</h3>
+<h5 id="submit-logic">Submit Logic</h5>
+<pre><code># Case One
+
+submit() {
+    line a
+    line b 
+    line c
+}
+
+# Case Two
+
+submit () {
+
+    if (x) {
+
+        doSomething.then(() =&gt; {
+            line a
+            line b 
+            line c
+        })
+    }
+    else {
+        line a
+        line b
+        line c
+    }
+}
+
+# Case Three
+
+submit () {
+
+    if (x) {
+
+        doSomething.then(() =&gt; {
+            _submit();
+        })
+    }
+    else {
+        _submit();
+    }
+}
+
+_submit() {
+    line a
+    line b
+    line c
+}
+</code></pre>
 <h5 id="communicate-from-parent-to-child-component">Communicate from parent to child component...</h5>
 <pre><code># Parent component template
 &lt;app-home [title]=" 'Peace' "&gt;&lt;/app-home&gt;
@@ -356,14 +405,14 @@ getData(): void {
         }));
 }
 </code></pre>
-<h5 id="model-mapping">Model Mapping</h5>
+<h5 id="model-mapping-translation-layer">Model Mapping - Translation Layer</h5>
 <p><strong>to provide a translation layer between server model and data model</strong></p>
 <pre><code># service.ts
 
 getData(): Observable&lt;Example[]&gt; {
 
     return this.http.get&lt;ExampleModel[]&gt;(this.atozRoute + "GetData")
-        .pipe(map(model =&gt; model.map(m =&gt; new Alphabet(m)))); # the translation layer 
+        .pipe(map(model =&gt; model.map(m =&gt; new Example(m)))); # the translation layer 
 }
 
 
@@ -562,5 +611,5 @@ sayHi('Tony');
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-02-01 06:37:31.506109+00:00
+Build Date UTC : 2021-02-03 09:58:32.202663+00:00
 -->
