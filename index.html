@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Angular Cheat Sheet</title>
+        <title>Sook Yan's Angular Learning Documentation</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body class="homepage">
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Angular Cheat Sheet</a>
+                <a class="navbar-brand" href=".">Sook Yan's Angular Learning Documentation</a>
 
                 <!-- Expanded navigation -->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
@@ -53,7 +53,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#angular-documentation" class="nav-link">Angular Documentation</a>
+            <li class="nav-item" data-level="1"><a href="#my-angular-learning-documentation" class="nav-link">My Angular Learning Documentation</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="3"><a href="#angular-cli-commands" class="nav-link">Angular CLI Commands</a>
               <ul class="nav flex-column">
@@ -71,6 +71,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-level="3"><a href="#git" class="nav-link">Git</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -78,7 +82,7 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="angular-documentation">Angular Documentation</h1>
+<h1 id="my-angular-learning-documentation">My Angular Learning Documentation</h1>
 <p>Reach me at: <a href="https://www.github.com/syhue">GitHub</a>, <a href="https://www.syhue.com">Personal Website</a>, <a href="https://www.linkedin.com/in/syhue/">LinkedIn</a></p>
 <h3 id="angular-cli-commands">Angular CLI Commands</h3>
 <h5 id="beginning">Beginning</h5>
@@ -100,51 +104,42 @@
 <li><code>now login</code> - For first time user to use now.sh.</li>
 <li><code>now</code> - Deploy your project. </li>
 </ul>
+<hr />
 <h3 id="angular">Angular</h3>
-<h5 id="api-bad-vs-good-example">API (Bad vs Good Example)</h5>
-<pre><code>## Bad Example
-
-# service.ts
-
-updateCardNumber(cardNumber: any): Observable&lt;any&gt; {
+<h4 id="api-bad-vs-good-example">API (Bad vs Good Example)</h4>
+<p><span class = "dark-pink">Bad Example</span> </p>
+<h6 id="servicets">service.ts</h6>
+<pre><code>updateCardNumber(cardNumber: any): Observable&lt;any&gt; {
 
     return this.http.put(this.route + "UpdateCardNumber", cardNumber).map( data =&gt; return data );
 }
-
-# component.ts
-
-this.service.updateCardNumber({ CardNumber : this.cardNumber });
-
-
-
-## Good Example
-
-# service.ts
-
-updateCardNumber(cardNumber: number): Observable&lt;any&gt; {  // typed input, observable can be any if we don't care about the response
+</code></pre>
+<h6 id="componentts">component.ts</h6>
+<pre><code>this.service.updateCardNumber({ CardNumber : this.cardNumber });
+</code></pre>
+<p><span class = "dark-pink">Good Example</span> </p>
+<h6 id="servicets_1">service.ts</h6>
+<pre><code>updateCardNumber(cardNumber: number): Observable&lt;any&gt; {  // typed input, observable can be any if we don't care about the response
 
     const body = { CardNumber : cardNumber } // this depends on server api expected body
 
     return this.http.put(this.route + "UpdateCardNumber", body) // .map is for transforming one result to another, no point to write if no transformation is needed
 
 }
-
-# component.ts
-
-this.service.updateCardNumber(this.cardNumber);
 </code></pre>
-<h5 id="submit-logic">Submit Logic</h5>
-<pre><code># Case One
-
-submit() {
+<h6 id="componentts_1">component.ts</h6>
+<pre><code>this.service.updateCardNumber(this.cardNumber);
+</code></pre>
+<h4 id="submit-logic">Submit Logic</h4>
+<h6 id="case-one">Case One</h6>
+<pre><code>submit() {
     line a
     line b 
     line c
 }
-
-# Case Two
-
-submit () {
+</code></pre>
+<h6 id="case-two">Case Two</h6>
+<pre><code>submit () {
 
     if (x) {
         doSomething.then(() =&gt; {
@@ -159,10 +154,9 @@ submit () {
         line c
     }
 }
-
-# Case Three
-
-submit () {
+</code></pre>
+<h6 id="case-three">Case Three</h6>
+<pre><code>submit () {
 
     if (x) {            
         doSomething.then(() =&gt; {
@@ -180,48 +174,43 @@ _submit() {
     line c
 }
 </code></pre>
-<h5 id="communicate-from-parent-to-child-component">Communicate from parent to child component...</h5>
-<pre><code># Parent component template
-&lt;app-home [title]=" 'Peace' "&gt;&lt;/app-home&gt;
-
-# Child component class
-import { Input } from 'angular';
+<h4 id="communicate-from-parent-to-child-component">Communicate from parent to child component...</h4>
+<h6 id="parent-component-template">Parent component template</h6>
+<pre><code>&lt;app-home [title]=" 'Peace' "&gt;&lt;/app-home&gt;
+</code></pre>
+<h6 id="child-component-class">Child component class</h6>
+<pre><code>import { Input } from 'angular';
 
 class ChildComponent {
     @Input() title: string;
 }
 </code></pre>
-<h5 id="attribute-directive-ngclass-directive">Attribute Directive: NgClass Directive</h5>
-<p><strong>ngClass Directive: The ngClass directive is used to add or remove CSS classes to an HTML element.</strong></p>
-<pre><code># login.component.html
-
-&lt;form class="loginForm"
+<h4 id="attribute-directive-ngclass-directive">Attribute Directive: NgClass Directive</h4>
+<p>ngClass Directive: The ngClass directive is used to add or remove CSS classes to an HTML element.</p>
+<h6 id="logincomponenthtml">login.component.html</h6>
+<pre><code>&lt;form class="loginForm"
           [formGroup]="form"
           (ngSubmit)="submit()"
           [ngClass]="{'showFormError': showFormError}"&gt;
 
           # [ngClass]="{property: boolen}"
 &lt;/form&gt;
-
-
-# login.component.ts
-
-submit(): void {
+</code></pre>
+<h6 id="logincomponentts">login.component.ts</h6>
+<pre><code>submit(): void {
 if (!this.form.valid) {
     this.showFormError = true;
     return;
 }
-
-
-# login.component.scss
-
-.showFormError {
+</code></pre>
+<h6 id="logincomponentscss">login.component.scss</h6>
+<pre><code>.showFormError {
     input.ng-invalid {
         border-color: red !important;
     }
 }
 </code></pre>
-<h5 id="attribute-directive-ngswitch-directive">Attribute Directive: NgSwitch Directive</h5>
+<h4 id="attribute-directive-ngswitch-directive">Attribute Directive: NgSwitch Directive</h4>
 <pre><code>&lt;div [ngSwitch]="currentPage"&gt;
     &lt;div *ngSwitchCase="0"&gt; Current Page is zero &lt;/div&gt;
     &lt;div *ngSwitchCase="1"&gt; Current Page is one &lt;/div&gt;
@@ -229,11 +218,10 @@ if (!this.form.valid) {
     &lt;div *ngSwitchDefault&gt; Default Page &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
-<h5 id="custom-attribute-directive">Custom Attribute Directive</h5>
+<h4 id="custom-attribute-directive">Custom Attribute Directive</h4>
 <p><code>ng new generate directive class</code> - Create a new directive.</p>
-<pre><code># class.directive.ts
-
-import { Directive, ElementRef, Input } from '@angular/core';
+<h6 id="classdirectivets">class.directive.ts</h6>
+<pre><code>import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
     selector: '[appClass]'
@@ -247,16 +235,14 @@ export class ClassDirective {
         this.element.nativeElement.style.backgroundColor = color;
     }
 }
-
-# component.html
-
-&lt;h1 [appClass]=" 'red' "&gt;&lt;/h1&gt;
 </code></pre>
-<h5 id="custom-structural-directives">Custom Structural Directives</h5>
+<h6 id="componenthtml">component.html</h6>
+<pre><code>&lt;h1 [appClass]=" 'red' "&gt;&lt;/h1&gt;
+</code></pre>
+<h4 id="custom-structural-directives">Custom Structural Directives</h4>
 <p><code>ng generate directive times</code> </p>
-<pre><code># times.directive.ts
-
-import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
+<h6 id="timesdirectivets">times.directive.ts</h6>
+<pre><code>import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
 
 @Directive({
     selector: '[appTimes]'
@@ -277,19 +263,16 @@ export class TimesDirective {
         }
     }
 }
-
-
-# component.html
-
-&lt;ul *appTimes="5"&gt;
+</code></pre>
+<h6 id="componenthtml_1">component.html</h6>
+<pre><code>&lt;ul *appTimes="5"&gt;
     &lt;li&gt;Hi there!&lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
-<h5 id="custom-ngfor">Custom *ngFor</h5>
+<h4 id="custom-ngfor">Custom *ngFor</h4>
 <p><code>ng generate directive times</code> </p>
-<pre><code># times.directive.ts
-
-import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
+<h6 id="timesdirectivets_1">times.directive.ts</h6>
+<pre><code>import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
 
 @Directive({
     selector: '[appTimes]'
@@ -312,22 +295,20 @@ export class TimesDirective {
         }
     }
 }
-
-
-# component.html
-
-&lt;ng-container *appTimes="images.length; let i = index"&gt;
+</code></pre>
+<h6 id="componenthtml_2">component.html</h6>
+<pre><code>&lt;ng-container *appTimes="images.length; let i = index"&gt;
     &lt;li
         class="page-item"
         [ngClass]="{ active: i === currentPage }"
         *ngIf="checkWindowIndex(i)"
     &gt;
 </code></pre>
-<h5 id="debug-in-typescriptjavascript">Debug in TypeScript/JavaScript</h5>
+<h4 id="debug-in-typescriptjavascript">Debug in TypeScript/JavaScript</h4>
 <pre><code>debugger 
 console.log()
 </code></pre>
-<h5 id="calling-api-without-observable-1-post-put">Calling API without Observable #1 (Post, Put)</h5>
+<h4 id="calling-api-without-observable-1-post-put">Calling API without Observable #1 (Post, Put)</h4>
 <pre><code>updateProfilePhoto(file: any) {
     const formsData = new FormData(); # FormData() is a built in function. 
     formData.append("file", file);
@@ -348,10 +329,9 @@ updateProfile(body: any, file:any) {
     }));
 }
 </code></pre>
-<h5 id="calling-api-with-observable-1-get">Calling API with Observable #1 (Get)</h5>
-<pre><code># service.ts
-
-getData(id: number, skip: number, take: number): Observable&lt;Data[]&gt;{
+<h4 id="calling-api-with-observable-1-get">Calling API with Observable #1 (Get)</h4>
+<h6 id="servicets_2">service.ts</h6>
+<pre><code>getData(id: number, skip: number, take: number): Observable&lt;Data[]&gt;{
     const params: any = {
         first-param: userId,
         second-param: skip.toString(),  # What is toString()?
@@ -363,20 +343,18 @@ getData(id: number, skip: number, take: number): Observable&lt;Data[]&gt;{
             return models.map(model =&gt; new MesraPointHistory(model));   
     }))
 }
-
-# data-model.ts
-
-export class DataModel {
+</code></pre>
+<h6 id="data-modelts">data-model.ts</h6>
+<pre><code>export class DataModel {
     PointId: number;
     CreateDate: string;
     Point: number;
     Remark: string;
     Title: string;
 }
-
-# data.ts
-
-import { DataModel } from "./data-model";
+</code></pre>
+<h6 id="datats">data.ts</h6>
+<pre><code>import { DataModel } from "./data-model";
 import { Moment } from "moment";
 import { BaseClass } from "../base-class";
 
@@ -398,10 +376,9 @@ export class Data extends BaseClass {
         this.title = model.Title;
     }
 }
-
-# data.component.ts
-
-this.loading = true;
+</code></pre>
+<h6 id="datacomponentts">data.component.ts</h6>
+<pre><code>this.loading = true;
 
 getData(): void {
 
@@ -423,10 +400,11 @@ getData(): void {
         .add(() =&gt; { this.loading = false });
 }
 </code></pre>
-<h5 id="calling-api-with-observable-2-get">Calling API with Observable #2 (Get)</h5>
+<h4 id="calling-api-with-observable-2-get">Calling API with Observable #2 (Get)</h4>
+<p>import { of } from 'rxjs';</p>
 <pre><code>getUser(reload = false): Observable &lt;User&gt; {
     if (!reload &amp;&amp; this.currentUser)
-        return of(this.currentUser);  # of() # import { of } from 'rxjs';
+        return of(this.currentUser);
 
     return this.http.get&lt;UserModel&gt;(this.route + "Profile")
         .pipe(map(model =&gt; {
@@ -435,20 +413,17 @@ getData(): void {
         }));
 }
 </code></pre>
-<h5 id="model-mapping-translation-layer">Model Mapping - Translation Layer</h5>
-<p><strong>to provide a translation layer between server model and data model</strong></p>
-<pre><code># service.ts
-
-getData(): Observable&lt;Example[]&gt; {
+<h4 id="model-mapping-translation-layer">Model Mapping - Translation Layer</h4>
+<p>To provide a translation layer between server model and data model</p>
+<h6 id="servicets_3">service.ts</h6>
+<pre><code>getData(): Observable&lt;Example[]&gt; {
 
     return this.http.get&lt;ExampleModel[]&gt;(this.atozRoute + "GetData")
-        .pipe(map(model =&gt; model.map(m =&gt; new Example(m)))); # the translation layer 
+        .pipe(map(model =&gt; model.map(m =&gt; new Example(m))));  # the translation layer 
 }
-
-
-# example.ts
-
-import { ExampleModel } from "./example-model";
+</code></pre>
+<h6 id="examplets">example.ts</h6>
+<pre><code>import { ExampleModel } from "./example-model";
 
 export class Example {
     id: number;
@@ -463,33 +438,35 @@ export class Example {
         this.description = model.Description;
     }
 }
-
-
-# example-model.ts
-
-export class ExampleModel {
+</code></pre>
+<h6 id="example-modelts">example-model.ts</h6>
+<pre><code>export class ExampleModel {
     Id: number;
     Title: string;
     SelectionTitle: string;
     Description: string;
 }
 </code></pre>
-<h5 id="routing">Routing</h5>
-<pre><code>{ path: 'profile/web-dev', component: WebDevComponent , data: { title: 'Web Development'} },  # app-routing.module.ts
-
-this.router.navigate(['wed-dev']); # profile.component.ts
-
-[routerLink]="'web-dev/'" # profile.component.html
+<h4 id="routing">Routing</h4>
+<h6 id="app-routingmodulets">app-routing.module.ts</h6>
+<pre><code>{ path: 'profile/web-dev', component: WebDevComponent , data: { title: 'Web Development'} },
 </code></pre>
-<h5 id="call-nested-object-from-api">Call nested object from API</h5>
+<h6 id="profilecomponentts">profile.component.ts</h6>
+<pre><code>this.router.navigate(['wed-dev']);
+</code></pre>
+<h6 id="profilecomponenthtml">profile.component.html</h6>
+<pre><code>[routerLink]="'web-dev/'"
+</code></pre>
+<h4 id="call-nested-object-from-api">Call nested object from API</h4>
 <pre><code>&lt;div *ngFor='let item of items'&gt;
     {{ item.something }}
 &lt;/div&gt;
 </code></pre>
-<h5 id="perform-event-click-in-typescript">Perform event click in typescript</h5>
-<pre><code>click.this.getAccessment # click it will direct to this.get.Accessment.
+<h4 id="perform-event-click-in-typescript">Perform event click in typescript</h4>
+<p>click it will direct to <code>this.getAccessment</code>.</p>
+<pre><code>click.this.getAccessment
 </code></pre>
-<h5 id="ngbmodal">NgbModal</h5>
+<h4 id="ngbmodal">NgbModal</h4>
 <pre><code>addPopupCard() {
 
     const option = {
@@ -500,8 +477,9 @@ this.router.navigate(['wed-dev']); # profile.component.ts
     this.modalService.open(any-component, option);
 }
 </code></pre>
+<hr />
 <h3 id="javascript-built-in-functions">JavaScript Built In Functions</h3>
-<h5 id="map">map</h5>
+<h4 id="map">map</h4>
 <pre><code>const array1 = [1, 4, 9, 16];
 
 # pass a function to map
@@ -510,20 +488,17 @@ const map1 = array1.map(x =&gt; x * 3);
 console.log(map1);
 # expected output: Array [3, 12, 27, 48]
 </code></pre>
-<h5 id="immediately-invoke-function-expression-iifes">Immediately Invoke Function Expression (IIFEs)</h5>
-<pre><code># Part 1
-
-(function(name) {
+<h4 id="immediately-invoke-function-expression-iifes">Immediately Invoke Function Expression (IIFEs)</h4>
+<h6 id="part-1">Part 1</h6>
+<pre><code>(function(name) {
 
     var greeting = 'Hello';
     console.log(greeting + ' ' + name);
 
 }('John'));
-
-
-# Part 2
-
-function buildFunctions2() {
+</code></pre>
+<h6 id="part-2">Part 2</h6>
+<pre><code>function buildFunctions2() {
 
     var arr = [];
 
@@ -543,7 +518,7 @@ fs2[0]();
 fs2[1]();
 fs2[2]();
 </code></pre>
-<h5 id="closures">Closures</h5>
+<h4 id="closures">Closures</h4>
 <pre><code>function greet(whattosay) {
 
     return function(name) {
@@ -556,8 +531,64 @@ greet('Hi')('Tony');
 var sayHi = greet('Hi');
 sayHi('Tony');
 </code></pre>
+<hr />
 <h3 id="rxjs">Rxjs</h3>
-<p><a href="https://rxjs.dev/api/index/function/of">function/of</a></p></div>
+<p><a href="https://rxjs.dev/api/index/function/of">function/of</a></p>
+<hr />
+<h3 id="git">Git</h3>
+<h4 id="how-to-write-a-commit-message">How to write a commit message</h4>
+<p>Cited from <a href="https://medium.com/swlh/writing-better-commit-messages-9b0b6ff60c67">Writing Better Commit Messages</a>.</p>
+<pre><code>type(scope): subject 
+
+&lt;body&gt;
+&lt;footer&gt;
+</code></pre>
+<h6 id="1-type-of-commit">1. Type of commit</h6>
+<pre><code>feat:     The new feature being added to a particular application
+fix:      A bug fix
+style:    Feature and updates related to styling
+refactor: Refactoring a specific section of the codebase
+test:     Everything related to testing
+docs:     Everything related to documentation
+chore:    Regular code maintenance
+</code></pre>
+<h6 id="2-scope-optional">2. Scope (optional)</h6>
+<p>Provided in parentheses after the type of commit, describing parts of the code affected by the changes or simply the epic name.</p>
+<pre><code>feat(claims)
+fix(orders)
+</code></pre>
+<h6 id="3-subject">3. Subject</h6>
+<p>Short description of the applied changes.
+- Limit the subject line to 50 characters
+- Your commit message should not contain any whitespace errors or punctuation marks
+- Do not end the subject line with a period
+- Use the present tense or imperative mood in the subject line</p>
+<pre><code>feat(claims): add claims detail page
+fix(orders): validation of custom specification
+</code></pre>
+<h6 id="4-body-optional">4. Body (Optional)</h6>
+<p>Use the body to explain what changes you have made and why you made them.
+- Separate the subject from the body with a blank line
+- Limit each line to 72 characters
+- Do not assume the reviewer understands what the original problem was, ensure you add it
+- Do not think your code is self-explanatory</p>
+<pre><code>refactor!: drop support for Node 6
+BREAKING CHANGE: refactor to use JavaScript features not available in Node 6.
+</code></pre>
+<h6 id="5-footer-optional">5. Footer (optional)</h6>
+<p>Use this section to reference issues affected by the code changes or comment to another developers or testers.</p>
+<pre><code>fix(orders): correct minor typos in code
+See the issue for details
+on typos fixed.
+Reviewed-by: @John Doe
+Refs #133
+</code></pre>
+<h4 id="some-useful-references">Some Useful References</h4>
+<ol>
+<li><a href="https://medium.com/better-programming/what-makes-a-good-pull-request-anyway-2a013a39aebe">What Makes a Good Pull Request, Anyway? by Jose Granja</a>.</li>
+<li><a href="https://medium.com/swlh/writing-better-commit-messages-9b0b6ff60c67">Writing Better Commit Messages by Apurva Jain</a>.</li>
+<li><a href="https://gist.github.com/parmentf/035de27d6ed1dce0b36a">Git Commit Emoji</a></li>
+</ol></div>
             </div>
         </div>
 
@@ -641,5 +672,5 @@ sayHi('Tony');
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-02-04 19:57:52.220729+00:00
+Build Date UTC : 2021-02-04 21:58:32.650586+00:00
 -->

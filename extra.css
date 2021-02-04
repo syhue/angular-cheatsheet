@@ -20,13 +20,19 @@ li {
     margin-bottom: 5px;
 }
 
-h5 {
-    margin-top: 3rem;
+h4 {
+    margin-top: 4rem;
+    font-size: large;
+    font-weight: 480;
+}
+
+h6 {
+    font-weight: 500;
 }
 
 h3 {
-    margin-top: 4rem;
-    font-weight: 330;
+    margin-top: 1rem;
+    font-weight: 600;
 }
 
 code {
@@ -36,8 +42,9 @@ code {
     border-color: #ffe6e6;
 }
 
-span.hljs-comment {
-    color: #03506f;
+span.hljs-comment , span.hljs-meta {
+    color: #8675a9;
+    font-weight: 550;
 }
 
 footer.col-md-12 > p {
@@ -57,3 +64,16 @@ code.hljs {
     font-size: 14px;
     font-family: Consolas, 'Courier New', monospace;
 }
+
+p {
+    font-size: 14px;
+}
+
+
+.dark-pink {
+    margin-top: 6rem !important;
+    color: #838383;
+    font-size: 17px;
+    font-weight: 450;
+}
+
