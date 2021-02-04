@@ -101,6 +101,38 @@
 <li><code>now</code> - Deploy your project. </li>
 </ul>
 <h3 id="angular">Angular</h3>
+<h5 id="api-bad-vs-good-example">API (Bad vs Good Example)</h5>
+<pre><code>## Bad Example
+
+# service.ts
+
+updateCardNumber(cardNumber: any): Observable&lt;any&gt; {
+
+    return this.http.put(this.route + "UpdateCardNumber", cardNumber).map( data =&gt; return data );
+}
+
+# component.ts
+
+this.service.updateCardNumber({ CardNumber : this.cardNumber });
+
+
+
+## Good Example
+
+# service.ts
+
+updateCardNumber(cardNumber: number): Observable&lt;any&gt; {  // typed input, observable can be any if we don't care about the response
+
+    const body = { CardNumber : cardNumber } // this depends on server api expected body
+
+    return this.http.put(this.route + "UpdateCardNumber", body) // .map is for transforming one result to another, no point to write if no transformation is needed
+
+}
+
+# component.ts
+
+this.service.updateCardNumber(this.cardNumber);
+</code></pre>
 <h5 id="submit-logic">Submit Logic</h5>
 <pre><code># Case One
 
@@ -115,7 +147,6 @@ submit() {
 submit () {
 
     if (x) {
-
         doSomething.then(() =&gt; {
             line a
             line b 
@@ -133,8 +164,7 @@ submit () {
 
 submit () {
 
-    if (x) {
-
+    if (x) {            
         doSomething.then(() =&gt; {
             _submit();
         })
@@ -611,5 +641,5 @@ sayHi('Tony');
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-02-03 09:58:32.202663+00:00
+Build Date UTC : 2021-02-04 19:57:52.220729+00:00
 -->
