@@ -106,6 +106,20 @@
 </ul>
 <hr />
 <h3 id="angular">Angular</h3>
+<h4 id="deployment-using-visual-studio-code-to-microsoft-azure">Deployment using Visual Studio Code to Microsoft Azure</h4>
+<ul>
+<li>
+<p>At node.js terminal</p>
+<ul>
+<li>Move to the directory of the root of the files. Run command <code>dotnet build</code>. After that, run the command <code>dotnet publish -c Release -o ./publish</code>. (Make sure your code able to run through <code>ng build --prod</code> before step 2a.)</li>
+<li>Find the publish folder and right click on <strong>deploy to web app</strong>.</li>
+<li>Open the staging website to check the version of the website. </li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/aspnet/core/tutorials/publish-to-azure-webapp-using-vscode?view=aspnetcore-5.0">References</a></p>
+</li>
+</ul>
 <h4 id="api-bad-vs-good-example">API (Bad vs Good Example)</h4>
 <p><span class = "dark-pink">Bad Example</span> </p>
 <h6 id="servicets">service.ts</h6>
@@ -193,7 +207,7 @@ class ChildComponent {
           (ngSubmit)="submit()"
           [ngClass]="{'showFormError': showFormError}"&gt;
 
-          # [ngClass]="{property: boolen}"
+          # [ngClass]="{property: boolean}"
 &lt;/form&gt;
 </code></pre>
 <h6 id="logincomponentts">login.component.ts</h6>
@@ -340,7 +354,7 @@ updateProfile(body: any, file:any) {
 
     return this.http.get&lt;DataModel[]&gt;(this.route + 'MiddlePartOfURL', { params: params })
         .pipe(map(models =&gt; {
-            return models.map(model =&gt; new MesraPointHistory(model));   
+            return models.map(model =&gt; new Data(model));   
     }))
 }
 </code></pre>
@@ -418,7 +432,7 @@ getData(): void {
 <h6 id="servicets_3">service.ts</h6>
 <pre><code>getData(): Observable&lt;Example[]&gt; {
 
-    return this.http.get&lt;ExampleModel[]&gt;(this.atozRoute + "GetData")
+    return this.http.get&lt;ExampleModel[]&gt;(this.route + "GetData")
         .pipe(map(model =&gt; model.map(m =&gt; new Example(m))));  # the translation layer 
 }
 </code></pre>
@@ -452,7 +466,11 @@ export class Example {
 <pre><code>{ path: 'profile/web-dev', component: WebDevComponent , data: { title: 'Web Development'} },
 </code></pre>
 <h6 id="profilecomponentts">profile.component.ts</h6>
-<pre><code>this.router.navigate(['wed-dev']);
+<pre><code>constructor(
+    private router: Router,
+) {}
+
+this.router.navigate(['wed-dev']);
 </code></pre>
 <h6 id="profilecomponenthtml">profile.component.html</h6>
 <pre><code>[routerLink]="'web-dev/'"
@@ -672,5 +690,5 @@ Refs #133
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-02-04 22:09:00.599876+00:00
+Build Date UTC : 2021-02-10 02:54:19.938778+00:00
 -->
