@@ -473,7 +473,7 @@ export class Example {
 this.router.navigate(['wed-dev']);
 </code></pre>
 <h6 id="profilecomponenthtml">profile.component.html</h6>
-<pre><code>[routerLink]="'web-dev/'"
+<pre><code>[routerLink]="['./web-dev']"
 </code></pre>
 <h4 id="call-nested-object-from-api">Call nested object from API</h4>
 <pre><code>&lt;div *ngFor='let item of items'&gt;
@@ -554,6 +554,12 @@ sayHi('Tony');
 <p><a href="https://rxjs.dev/api/index/function/of">function/of</a></p>
 <hr />
 <h3 id="git">Git</h3>
+<h4 id="how-to-solve-conflict">How to solve conflict</h4>
+<h6 id="1-switch-to-target-branch-then-pull-the-latest">1. Switch to target branch, then pull the latest.</h6>
+<h6 id="2-switch-back-to-the-pull-request-branch">2. Switch back to the pull request branch.</h6>
+<h6 id="3-merge-from-the-target-branch">3. Merge from the target branch.</h6>
+<h6 id="4-resolve-conflict">4. Resolve conflict.</h6>
+<h6 id="5-commit-and-push">5. Commit and push.</h6>
 <h4 id="how-to-write-a-commit-message">How to write a commit message</h4>
 <p>Cited from <a href="https://medium.com/swlh/writing-better-commit-messages-9b0b6ff60c67">Writing Better Commit Messages</a>.</p>
 <pre><code>type(scope): subject 
@@ -690,5 +696,5 @@ Refs #133
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-02-10 08:20:07.053589+00:00
+Build Date UTC : 2021-03-01 13:06:40.613442+00:00
 -->
