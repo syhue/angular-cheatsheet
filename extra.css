@@ -20,21 +20,41 @@ li {
     margin-bottom: 5px;
 }
 
+h1 {
+    font-size: large;
+    text-decoration: underline;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: lightslategray;
+}
+
+h3 {
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: x-large;
+    color: maroon;
+    cursor: pointer;
+}
+
+h3:hover {
+    text-shadow: 2px 2px 3px lightsalmon;
+}
+
 h4 {
     margin-top: 4rem;
     font-size: large;
     font-weight: 500;
     color: #28527a !important;
     text-decoration: underline !important;
+    cursor: pointer;
+}
+
+h4:hover {
+    text-shadow: 2px 2px 3px lightsteelblue;
 }
 
 h6 {
     font-weight: 500;
-}
-
-h3 {
-    margin-top: 1rem;
-    font-weight: 600;
 }
 
 code {
@@ -78,4 +98,5 @@ p {
     font-size: 17px;
     font-weight: 450;
 }
+
 
