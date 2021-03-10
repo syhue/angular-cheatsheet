@@ -24,8 +24,8 @@ h4 {
     margin-top: 4rem;
     font-size: large;
     font-weight: 500;
-    color: #28527a;
-    text-decoration: underline;
+    color: #28527a !important;
+    text-decoration: underline !important;
 }
 
 h6 {
