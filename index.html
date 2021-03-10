@@ -106,8 +106,26 @@
 </ul>
 <hr />
 <h3 id="angular">Angular</h3>
+<h4 id="observable">Observable</h4>
+<pre><code>getBranchDetail(id: string): Observable&lt;Branch&gt;{
+
+    return this.http.get&lt;{result: BranchModel}&gt;(this.branchRoute + id).pipe(map(model =&gt; model.result))
+}
+</code></pre>
+<ul>
+<li><code>&lt;Branch&gt;</code> - the one beside function is what you would return to your caller</li>
+<li><code>&lt;{result: BranchModel}&gt;</code> the one in the get is what you expect from the <em>server</em></li>
+</ul>
+<p>so you receive one thing, and you return other thing, then some transformation must be happening in the middle</p>
 <h4 id="how-to-reload-when-closing-modal">How to reload when closing modal</h4>
 <pre><code>window.location.reload();
+</code></pre>
+<p>or</p>
+<pre><code>modal.result.then(() =&gt; {
+    // this part will run with params where you pass in with this.modalInstance.close()
+}, () =&gt; {
+    // this part will run with params where you pass in with this.modalInstance.dismiss(), can leave blank if no action needed
+})
 </code></pre>
 <h4 id="get-params-from-url">Get params from URL</h4>
 <pre><code>this.route.snapshot.paramMap.get('id');
@@ -708,5 +726,5 @@ Refs #133
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-03-10 04:33:21.557451+00:00
+Build Date UTC : 2021-03-10 07:26:57.793631+00:00
 -->
